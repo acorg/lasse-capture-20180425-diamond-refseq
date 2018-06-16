@@ -15,7 +15,7 @@ html:
         proteins-to-pathogens.py \
             --format fastq \
             --html \
-            --minProteinFraction 0.1 \
+            --minProteinFraction 0.01 \
             --sampleNameRegex '^([^/]+)/' \
             --pathogenType viral \
             --proteinFastaFilename $(DB) \

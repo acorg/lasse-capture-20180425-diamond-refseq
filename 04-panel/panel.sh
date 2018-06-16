@@ -22,15 +22,6 @@ function panel()
 {
     echo "  noninteractive-alignment-panel.py started at $(date)" >> $log
 
-    dbFastaFile=$root/share/ncbi/viral-refseq/viral-protein-20161124/viral.protein.fasta
-
-    if [ ! -f $dbFastaFile ]
-    then
-        echo "  DIAMOND database FASTA file $dbfile does not exist!" >> $log
-        logStepStop $log
-        exit 1
-    fi
-
     tasks=$(tasksForSample)
 
     allJSON=
@@ -74,13 +65,9 @@ function panel()
       --fastq $allFASTQ \
       --matcher diamond \
       --outputDir $outputDir \
-      --withScoreBetterThan 60 \
-      --maxTitles 100 \
-      --minMatchingReads 10 \
-      --scoreCutoff 50 \
-      --minCoverage 0.1 \
-      --negativeTitleRegex phage \
-      --databaseFastaFilename $dbFastaFile > summary-proteins
+      --maxTitles 500 \
+      --scoreCutoff 40 \
+      --negativeTitleRegex phage > summary-proteins
     echo "  noninteractive-alignment-panel.py stopped at $(date)" >> $log
 
     echo "  proteins-to-pathogens.py started at $(date)" >> $log
